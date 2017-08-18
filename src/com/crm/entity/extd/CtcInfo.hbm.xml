@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="com.crm.entity.extd.CtcInfo" table="ctc_info">
+	
+		<id name="ctcId" column="ctc_id"></id>
+		
+		<property name="crmId" column="crm_id"></property>
+		<property name="ctcName" column="ctc_name"></property>
+		<property name="ctcTitle" column="ctc_title"></property>
+		<property name="ctcCel" column="ctc_cel"></property>
+		<property name="ctcTel" column="ctc_tel"></property>
+		<property name="ctcFax" column="ctc_fax"></property>
+		
+		<property name="ctcMail" column="ctc_mail"></property>
+		<property name="custName" column="cust_name"></property>
+		<property name="ctcProv" column="ctc_prov"></property>
+		<property name="ctcCity" column="ctc_city"></property>
+		<property name="ctcAddr" column="ctc_addr"></property>
+		<property name="ctcRmk" column="ctc_rmk"></property>
+		
+	</class>
+
+</hibernate-mapping>

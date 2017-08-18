@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="com.crm.entity.extd.OppInfo" table="opp_info">
+	
+		<id name="oppId" column="opp_id"></id>
+		
+		<property name="crmName" column="crm_name"></property>
+		<property name="oppName" column="opp_name"></property>
+		<property name="custName" column="cust_name"></property>
+		<property name="ctcName" column="ctc_name"></property>
+		<property name="prodSort" column="prod_sort"></property>
+		
+		<property name="saleStg" column="sale_stg"></property>
+		<property name="oppSrc" column="opp_src"></property>
+		<property name="preSaleSum" column="pre_sale_sum"></property>
+		<property name="preDealDate" column="pre_deal_date"></property>
+		<property name="succPer" column="succ_per"></property>
+		<property name="oppRmk" column="opp_rmk"></property>
+		
+	</class>
+
+</hibernate-mapping>

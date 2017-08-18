@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="com.crm.entity.extd.DealInfo" table="deal_info">
+	
+		<id name="dealId" column="deal_id"></id>
+		
+		<property name="crmName" column="crm_name"></property>
+		<property name="dealThm" column="deal_thm"></property>
+		<property name="custName" column="cust_name"></property>
+		<property name="ctcName" column="ctc_name"></property>
+		<property name="oppId" column="opp_id"></property>
+		<property name="ofrId" column="ofr_id"></property>
+		<property name="prodSort" column="prodSort"></property>
+		<property name="dealStatus" column="deal_status"></property>
+		<property name="dealDate" column="deal_date"></property>
+		<property name="overDate" column="over_date"></property>
+		<property name="saleSum" column="sale_sum"></property>
+		
+	</class>
+
+</hibernate-mapping>

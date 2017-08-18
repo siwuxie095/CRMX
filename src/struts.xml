@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	
+	<package name="demo" extends="struts-default" namespace="/">
+	
+		<!-- 声明自定义拦截器 -->
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.crm.interceptor.LoginInterceptor"></interceptor>
+			<interceptor name="permissionInterceptor" class="com.crm.interceptor.PermissionInterceptor"></interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="loginInterceptor"></interceptor-ref>
+				<interceptor-ref name="permissionInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="myStack"></default-interceptor-ref>
+		
+		<global-results>
+			<result name="login_none">/xcrm/nav/login.jsp</result>
+			<result name="lack_info">/xcrm/crm_mgt_jump/lack_crm_info.jsp</result>
+		</global-results>
+		
+		
+		<action name="crm_pwdx_*" class="com.crm.action.CrmPwdxAction" method="{1}">
+		
+			<interceptor-ref name="loginInterceptor">
+				<param name="excludeMethods">login,register</param>
+			</interceptor-ref>
+			<interceptor-ref name="permissionInterceptor">
+				<param name="excludeMethods">login,register,modify</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			
+			<result name="login_succ">/xcrm/nav/index.jsp</result>
+			<result name="login_err">/xcrm/login_jump/login_err.jsp</result>
+			<result name="login_none">/xcrm/nav/login.jsp</result>
+			<result name="logout">/xcrm/nav/index.jsp</result>
+			<result name="register_succ">xcrm/register_jump/register_succ.jsp</result>
+			<result name="register_err">xcrm/register_jump/register_err.jsp</result>
+			<result name="modify">/xcrm/nav/index.jsp</result>
+			<result name="qry_all">/xcrm/sys_mgt/crm_pwd_mgt.jsp</result>
+			<result name="delete" type="redirectAction">crm_pwdx_queryAll</result>
+			<result name="return_back" type="redirectAction">${returnUri}</result>
+		</action>
+		
+		
+		
+		<action name="crm_info_*" class="com.crm.action.CrmInfoAction" method="{1}">
+		
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<interceptor-ref name="permissionInterceptor">
+				<param name="excludeMethods">add</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			
+			<result name="add">/xcrm/crm_mgt_jump/add_succ.jsp</result>
+			<result name="qry_all">/xcrm/sys_mgt/crm_role_mgt.jsp</result>
+			<result name="modify" type="redirectAction">crm_info_queryAll</result>
+			<result name="delete" type="redirectAction">crm_info_queryAll</result>
+		</action>
+		
+		
+		
+		<action name="cust_info_*" class="com.crm.action.CustInfoAction" method="{1}">
+		
+			<result name="qry_all">/xcrm/cust_mgt/qry_all_cust_info.jsp</result>
+			<result name="qry_by_lvl">/xcrm/cust_mgt/qry_cust_info_by_lvl.jsp</result>
+			<result name="qry_by_status">/xcrm/cust_mgt/qry_cust_info_by_status.jsp</result>
+			<result name="qry_by_type">/xcrm/cust_mgt/qry_cust_info_by_type.jsp</result>
+			<result name="qry_dtl_by_id">/xcrm/cust_mgt/qry_dtl_cust_info_by_id.jsp</result>
+			<result name="qry_dtl_by_name">/xcrm/cust_mgt/qry_dtl_cust_info_by_name.jsp</result>
+			<result name="qry_fuzzy">/xcrm/cust_mgt/qry_fuzzy_cust_info.jsp</result>
+			<result name="add_succ" type="redirectAction">cust_info_queryDtlById</result>
+			<result name="add_err">/xcrm/cust_mgt_jump/add_err.jsp</result>
+			<result name="modify" type="redirectAction">cust_info_queryDtlById</result>
+			<result name="delete" type="redirectAction">cust_info_queryAll</result>
+		</action>
+		
+		
+		
+		<action name="ctc_info_*" class="com.crm.action.CtcInfoAction" method="{1}">
+			
+			<result name="qry_all">/xcrm/ctc_mgt/qry_all_ctc_info.jsp</result>
+			<result name="qry_dtl_by_id">/xcrm/ctc_mgt/qry_dtl_ctc_info_by_id.jsp</result>
+			<result name="qry_dtl_by_name">/xcrm/ctc_mgt/qry_dtl_ctc_info_by_name.jsp</result>
+			<result name="qry_fuzzy">/xcrm/ctc_mgt/qry_fuzzy_ctc_info.jsp</result>
+			<result name="add_succ" type="redirectAction">ctc_info_queryDtlById</result>
+			<result name="add_err">/xcrm/ctc_mgt_jump/add_err.jsp</result>
+			<result name="modify" type="redirectAction">ctc_info_queryDtlById</result>
+			<result name="delete" type="redirectAction">ctc_info_queryAll</result>
+		</action>
+		
+		
+		
+		<action name="opp_info_*" class="com.crm.action.OppInfoAction" method="{1}">
+			
+			<result name="qry_all">/xcrm/opp_mgt/qry_all_opp_info.jsp</result>
+			<result name="qry_dtl_by_id">/xcrm/opp_mgt/qry_dtl_opp_info_by_id.jsp</result>
+			<result name="qry_dtl_by_name">/xcrm/opp_mgt/qry_dtl_opp_info_by_name.jsp</result>
+			<result name="add_succ">/xcrm/opp_mgt/add_opp_info_after.jsp</result>
+			<result name="add_err">/xcrm/nav/error.jsp</result>
+			<result name="assign">/xcrm/opp_mgt/assign_opp_info.jsp</result>
+			<result name="modify" type="redirectAction">opp_info_queryDtlById</result>
+			<result name="delete" type="redirectAction">opp_info_queryAll</result>
+		</action>
+		
+		
+		
+		<action name="ofr_info_*" class="com.crm.action.OfrInfoAction" method="{1}">
+			
+			<result name="qry_all">/xcrm/ofr_mgt/qry_all_ofr_info.jsp</result>
+			<result name="qry_dtl_by_id">/xcrm/ofr_mgt/qry_dtl_ofr_info_by_id.jsp</result>
+			<result name="qry_dtl_by_name">/xcrm/ofr_mgt/qry_dtl_ofr_info_by_name.jsp</result>
+			<result name="add_succ" type="redirectAction">ofr_info_queryDtlById</result>
+			<result name="add_err">/xcrm/nav/error.jsp</result>
+			<result name="modify" type="redirectAction">ofr_info_queryDtlById</result>
+			<result name="delete" type="redirectAction">ofr_info_queryAll</result>
+		</action>
+		
+		
+		
+		<action name="deal_info_*" class="com.crm.action.DealInfoAction" method="{1}">
+		
+			<result name="qry_all">/xcrm/deal_mgt/qry_all_deal_info.jsp</result>
+			<result name="qry_dtl_by_id">/xcrm/deal_mgt/qry_dtl_deal_info_by_id.jsp</result>
+			<result name="qry_dtl_by_name">/xcrm/deal_mgt/qry_dtl_deal_info_by_name.jsp</result>
+			<result name="add_succ" type="redirectAction">deal_info_queryDtlById</result>
+			<result name="add_err">/xcrm/nav/error.jsp</result>
+			<result name="modify" type="redirectAction">deal_info_queryDtlById</result>
+			<result name="delete" type="redirectAction">deal_info_queryAll</result>
+		</action>
+		
+		
+		
+		<action name="log_info_*" class="com.crm.action.LogInfoAction" method="{1}">
+		
+			<result name="qry_all">/xcrm/log_mgt/qry_all_log_info.jsp</result>
+			<result name="qry_dtl_by_id">/xcrm/log_mgt/qry_dtl_log_info_by_id.jsp</result>
+			<result name="qry_dtl_by_name">/xcrm/log_mgt/qry_dtl_log_info_by_name.jsp</result>
+			<result name="add_succ" type="redirectAction">log_info_queryDtlById</result>
+			<result name="add_err">/xcrm/nav/error.jsp</result>
+			<result name="modify" type="redirectAction">log_info_queryDtlById</result>
+			<result name="delete" type="redirectAction">log_info_queryAll</result>
+		</action>
+		
+	</package>
+
+</struts>
+
+
